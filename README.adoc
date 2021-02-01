@@ -2,8 +2,6 @@
 
 Install Protonmail Bridge in Home Assistant, to enable notifications using a Protonmail account.
 
-![Node-RED in the Home Assistant Frontend](images/screenshot.png)
-
 IMPORTANT: This addon is still a work in progress, and is not yet recommended for installation
 
 == About

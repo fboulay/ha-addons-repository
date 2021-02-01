@@ -1,0 +1,7 @@
+{
+    "name": "Pronton mail bridge for HA",
+    "version": "0.0.1",
+    "slug": "protonmailbridge",
+    "description": "Addon to instal Protonmail Bridge. Allow to use a Prontonmail account to send emails.",
+    "arch": ["armv7"]
+}
