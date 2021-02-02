@@ -1,1 +1,1 @@
-# Documentation for Home Assistant Protonmail Bridge addon
+# Documentation for Home Assistant ProtonMail Bridge addon

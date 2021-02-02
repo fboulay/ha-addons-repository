@@ -1,0 +1,19 @@
+#!/usr/bin/expect -f
+
+#
+# Allow to execute ProtonMail Bridge in non interactive mode, allowed parameters:
+#  1 / username : ProtonMail account user name
+#  2 / password : ProtonMail account password
+
+set timeout -1
+
+spawn /protonmail/proton-bridge -c
+expect ">>>"
+send -- "login\r"
+expect "Username:"
+send -- "[lindex $argv 0]\r"
+expect "Password:"
+send -- "[lindex $argv 1]\r"
+expect ">>>"
+send -- "info\r"
+expect eof
