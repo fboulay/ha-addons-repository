@@ -4,6 +4,7 @@
 # Allow to execute ProtonMail Bridge in non interactive mode, allowed parameters:
 #  1 / username : ProtonMail account user name
 #  2 / password : ProtonMail account password
+# usage: pmb-non-interactive.expect <username> <password>
 
 set timeout -1
 

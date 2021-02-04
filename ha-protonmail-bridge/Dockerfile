@@ -1,6 +1,5 @@
 ARG BUILD_FROM
-
-# Build image
+# Build image is on Alpine because runtime image is on Alpine as well
 FROM golang:1.15.7-alpine3.13 AS build
 
 # Install dependencies
@@ -12,6 +11,7 @@ COPY build.sh /build/
 RUN bash build.sh
 
 # Runtime image provided by Home Assistant
+
 FROM $BUILD_FROM
 
 EXPOSE 25/tcp
@@ -29,14 +29,14 @@ RUN apk add --no-cache \
 
 COPY --from=build /build/proton-bridge/Desktop-Bridge /protonmail/proton-bridge
 COPY gpgparams /protonmail/
-COPY run.sh /
-COPY pmb-non-interactive.expect /
-RUN chmod +x /run.sh
-RUN chmod +x /pmb-non-interactive.expect
-RUN ln -s /data/.cache /root/.cache
-RUN ln -s /data/.gnupg /root/.gnupg
-RUN ln -s /data/.password-store /root/.password-store
-RUN ln -s /data/.config /root/.config
+COPY run.sh pmb-non-interactive.expect /
+
+RUN chmod +x /run.sh \
+    && chmod +x /pmb-non-interactive.expect \
+    && ln -s /data/.cache /root/.cache \
+    && ln -s /data/.gnupg /root/.gnupg \
+    && ln -s /data/.password-store /root/.password-store \
+    && ln -s /data/.config /root/.config
 
 
 ENTRYPOINT "bashio" "/run.sh" 
