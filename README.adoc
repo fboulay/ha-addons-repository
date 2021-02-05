@@ -16,7 +16,7 @@ https://github.com/fboulay/ha-addons-repository
 
 == Available add-ons
 
-=== link:ha-protonmail-bridge/[ProtonMail Bridge]
+=== link:ha-protonmail-bridge/DOCS.md[ProtonMail Bridge]
 
 * Install the ProtonMail bridge to send emails using your ProtonMail account
 
