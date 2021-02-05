@@ -23,4 +23,4 @@ pass init pass-key
 # Fake a terminal, so it does not quit because of EOF...
 rm -f faketty
 mkfifo faketty
-cat faketty | /pmb-non-interactive.expect $(bashio::config 'username') $(bashio::config 'password')
+cat faketty | /pmb-non-interactive.expect $(bashio::config 'username') $(bashio::config 'password') $(bashio::config 'two_factor_code')
