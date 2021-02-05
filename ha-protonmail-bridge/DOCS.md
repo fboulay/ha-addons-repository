@@ -60,7 +60,7 @@ notify:
     platform: smtp
     sender: <your_protonmail_email_address>
     recipient: email_address_of_recipient
-    server: 01076be4-pmb
+    server: 22fd13a0-pmb
     port: 25
     encryption: none
     username: <your_protonmail_bridge_username>
@@ -69,7 +69,7 @@ notify:
 
 ### Option: `server`
 
-When using from my addon repository, should be set to `f0b6128f-pmb`
+When using from my addon repository, should be set to `22fd13a0-pmb`
 
 ### Option: `username` and `password`
 
@@ -125,6 +125,28 @@ Here are some ideas to improve this addon:
 * Run the ProtonMail bridge in the background using Systemd (using this tutorial for example https://gist.github.com/ibaiul/60d603845df931483a05d96c5b433981)
 * Create a change log using [GitHub's releases][releases]
 functionality.
+
+## Testing on you local machine
+
+.Build the image in the ha-protonmail-bridge directory
+[source]
+----
+docker build --build-arg BUILD_FROM="homeassistant/amd64-base:latest" -t local/my-test-addon .
+----
+
+.Run built image
+[source]
+----
+docker run --rm -v /tmp/my_test_data:/data -p 25:2525 local/my-test-addon
+----
+
+Inside the directory `my_test_data`, create a file called `options.json` with the correct configuration for the addon.
+
+.Start a shell in the image to debug
+[source]
+----
+docker run --rm -v /tmp/my_test_data:/data -p 25:2525  -ti --entrypoint bash local/my-test-addon
+----
 
 ## License
 

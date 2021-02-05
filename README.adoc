@@ -1,39 +1,35 @@
-= Home Assistant addon: ProtonMail Bridge
+= Home Assistant add-ons repository
 
-Install ProtonMail Bridge in Home Assistant, to enable notifications using a ProtonMail account.
+== About
+
+Here, you will find all my add-ons for Home Assistant
+
+== Installation
+
+Adding this add-ons repository to your Home Assistant instance is
+pretty easy. Follow https://home-assistant.io/hassio/installing_third_party_addons[the official instructions] on the
+website of Home Assistant, and use the following URL: 
+
+```
+https://github.com/fboulay/ha-addons-repository
+```
+
+== Available add-ons
+
+=== link:ha-protonmail-bridge/[ProtonMail Bridge]
+
+* Install the ProtonMail bridge to send emails using your ProtonMail account
 
 IMPORTANT: This addon is still a work in progress, and is not yet recommended for installation
 
-== About
+==== About ProtonMail bridge
 
 ProtonMail Bridge is an application available to all paid users that enables the integration of your ProtonMail account with any SMTP clients (in theory). 
 Bridge runs in the background by seamlessly encrypting messages as they leave Home Assistant.
 
 This addon allow to send notification emails using a ProtonMail account. 
 
-link:ha-protonmail-bridge/DOCS.md[Read the full documentation]
-
-== Test the addon
-
-.Build the image in the ha-protonmail-bridge directory
-[source]
-----
-docker build --build-arg BUILD_FROM="homeassistant/amd64-base:latest" -t local/my-test-addon .
-----
-
-.Run built image
-[source]
-----
-docker run --rm -v /tmp/my_test_data:/data -p 25:2525 local/my-test-addon
-----
-
-Inside the directory `my_test_data`, create a file called `options.json` with the correct configuration for the addon.
-
-.Start a shell in the image to debug
-[source]
-----
-docker run --rm -v /tmp/my_test_data:/data -p 25:2525  -ti --entrypoint bash local/my-test-addon
-----
+link:ha-protonmail-bridge/DOCS.md[Read the full documentation of the add-on]
 
 == License
 
