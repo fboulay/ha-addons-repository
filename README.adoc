@@ -20,7 +20,6 @@ https://github.com/fboulay/ha-addons-repository
 
 * Install the ProtonMail bridge to send emails using your ProtonMail account
 
-IMPORTANT: This addon is still a work in progress, and is not yet recommended for installation
 
 ==== About ProtonMail bridge
 
@@ -28,8 +27,6 @@ ProtonMail Bridge is an application available to all paid users that enables the
 Bridge runs in the background by seamlessly encrypting messages as they leave Home Assistant.
 
 This addon allow to send notification emails using a ProtonMail account. 
-
-link:ha-protonmail-bridge/DOCS.md[Read the full documentation of the add-on]
 
 == License
 
