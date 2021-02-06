@@ -1,0 +1,45 @@
+#!/usr/bin/expect -f
+
+#
+# Check if ProtonMail bridge is connected by sending the `info` command
+#
+
+log_user 0
+set timeout 15
+
+spawn /protonmail/proton-bridge -c
+
+expect ">>>"
+send "info\r"
+
+expect {
+    "No active accounts" {
+        puts "Not connected"
+        exit 1
+    }
+    "Please login to" {
+        puts "Not connected"
+        exit 1
+    }
+    "Configuration for" {
+        puts "Connected\n"
+
+        puts "Add in your configuration.yaml with a STMP integration:"
+        expect -re "Username: (.*?)\r" {
+            puts "username: $expect_out(1,string)" 
+        }
+        
+        expect -re "Password: (.*?)\r" {
+            puts "password: $expect_out(1,string)"
+        }
+        puts ""
+        exit 2
+    }
+    timeout {
+        puts "Timeout while reading connection information"
+        exit -1
+    }
+}
+
+puts ""
+exit -1

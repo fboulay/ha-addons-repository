@@ -1,5 +1,7 @@
 #!/usr/bin/env bashio
 
+#source src/lib.trap.sh
+
 # Create directories we want to store in persistent directory
 mkdir -p /data/.password-store
 mkdir -p /data/.gnupg 2>/dev/null
@@ -15,12 +17,41 @@ chmod 700 /data/.password-store
 socat TCP-LISTEN:25,fork TCP:127.0.0.1:1025 &
 socat TCP-LISTEN:143,fork TCP:127.0.0.1:1143 &
 
-# A new one is created each time the container is starting. It does not seem to create any issue
-gpg --no-options --generate-key --batch /protonmail/gpgparams
-pass init pass-key
-
-# Start protonmail
-# Fake a terminal, so it does not quit because of EOF...
 rm -f faketty
 mkfifo faketty
-cat faketty | /pmb-non-interactive.expect $(bashio::config 'username') $(bashio::config 'password') $(bashio::config 'two_factor_code')
+
+
+# Disable exit on non-zero status, because expect script can return non-zero values
+set +o errexit 
+
+# A new one is created if not connected to ProtonMail
+PMB_CONNECTED=$(/src/info.expect)
+
+if [[ $? == 1 ]]; then
+    set -o errexit 
+    echo "Not connected - generating a PGP key"
+    gpg --no-options --generate-key --batch --no-tty /protonmail/gpgparams &> /dev/null
+    pass init pass-key &> /dev/null
+    
+    set +o errexit 
+    echo "Not connected - adding account to ProtonMail Bridge"
+    PMB_ADD_ACCOUNT=$(/src/add-account.expect $(bashio::config 'username') $(bashio::config 'password') $(bashio::config 'two_factor_code')) 
+
+    # Display error on add account
+    if [[ $? != 0 ]]; then
+        echo -e "${PMB_ADD_ACCOUNT}" 
+    fi
+fi
+
+set -o errexit 
+PMB_INFO=$(/src/info.expect) 
+if [[ $? == 2 ]]; then
+    set +o errexit 
+    echo -e " \n" 
+    echo -e "${PMB_INFO}"
+    echo -e " \n"
+    echo "Starting ProtonMail Bridge" 
+    /protonmail/proton-bridge --noninteractive
+else
+    >&2 echo "Cannot connect - Please check errors above"
+fi

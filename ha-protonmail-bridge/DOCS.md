@@ -132,25 +132,22 @@ functionality.
 
 ## Testing on you local machine
 
-.Build the image in the ha-protonmail-bridge directory
-[source]
-----
+→ Build the image in the ha-protonmail-bridge directory
+```shell
 docker build --build-arg BUILD_FROM="homeassistant/amd64-base:latest" -t local/my-test-addon .
-----
+```
 
-.Run built image
-[source]
-----
+→ Run built image
+```shell
 docker run --rm -v /tmp/my_test_data:/data -p 25:2525 local/my-test-addon
-----
+```
 
 Inside the directory `my_test_data`, create a file called `options.json` with the correct configuration for the addon.
 
-.Start a shell in the image to debug
-[source]
-----
+→ Start a shell in the image to debug
+```shell
 docker run --rm -v /tmp/my_test_data:/data -p 25:2525  -ti --entrypoint bash local/my-test-addon
-----
+```
 
 ## License
 

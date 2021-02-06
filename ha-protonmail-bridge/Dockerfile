@@ -21,18 +21,25 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Needed dependencies to run ProtonMail bridge
 RUN apk add --no-cache \
+    # To control ProtonMail bridge cli
     expect \
+    # To bind any port
     socat \
+    # Needed by ProtonMail bridge
     libsecret \
+    # For PGP
     pass \
+    # For tput command
+    ncurses \   
     && rm -rf /var/cache/apk/*
 
 COPY --from=build /build/proton-bridge/Desktop-Bridge /protonmail/proton-bridge
 COPY gpgparams /protonmail/
-COPY run.sh pmb-non-interactive.expect /
+COPY run.sh  /
+COPY src/* /src/
 
 RUN chmod +x /run.sh \
-    && chmod +x /pmb-non-interactive.expect \
+    && chmod +x /src/* \
     && ln -s /data/.cache /root/.cache \
     && ln -s /data/.gnupg /root/.gnupg \
     && ln -s /data/.password-store /root/.password-store \
