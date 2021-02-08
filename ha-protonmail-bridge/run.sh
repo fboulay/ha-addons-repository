@@ -1,10 +1,12 @@
 #!/usr/bin/env bashio
 
+bashio::log.info "Staring ProtonMail Bridge addon"
+
 # Create directories we want to store in persistent directory
 mkdir -p /data/.password-store
-mkdir -p /data/.gnupg 2>/dev/null
-mkdir -p /data/.cache 2>/dev/null
-mkdir -p /data/.config 2>/dev/null
+mkdir -p /data/.gnupg 
+mkdir -p /data/.cache 
+mkdir -p /data/.config 
 
 chmod 700 /data/.gnupg
 chmod 700 /data/.password-store
@@ -15,12 +17,40 @@ chmod 700 /data/.password-store
 socat TCP-LISTEN:25,fork TCP:127.0.0.1:1025 &
 socat TCP-LISTEN:143,fork TCP:127.0.0.1:1143 &
 
-# A new one is created each time the container is starting. It does not seem to create any issue
-gpg --no-options --generate-key --batch /protonmail/gpgparams
-pass init pass-key
+# Disable exit on non-zero status, because expect script can return non-zero values
+set +o errexit 
 
-# Start protonmail
-# Fake a terminal, so it does not quit because of EOF...
-rm -f faketty
-mkfifo faketty
-cat faketty | /pmb-non-interactive.expect $(bashio::config 'username') $(bashio::config 'password') $(bashio::config 'two_factor_code')
+# Generate a PGP key if missing
+gpg --list-keys pass-key &> /dev/null
+if [[ $? != 0 ]]; then
+    bashio::log.info "First time launch - Generating a PGP key"
+    gpg --no-options --generate-key --batch --no-tty /protonmail/gpgparams &> /dev/null
+    pass init pass-key &> /dev/null
+fi
+
+# A new one is created if not connected to ProtonMail
+PMB_CONNECTED=$(/src/info.expect)
+
+if [[ $? == 1 ]]; then
+    bashio::log.info "Not connected - adding account to ProtonMail Bridge"
+    set +o errexit 
+    PMB_ADD_ACCOUNT=$(/src/add-account.expect $(bashio::config 'username') $(bashio::config 'password') $(bashio::config 'two_factor_code')) 
+
+    # Display error on add account
+    if [[ $? != 0 ]]; then
+        bashio::log.error "${PMB_ADD_ACCOUNT}" 
+    fi
+fi
+
+set +o errexit 
+PMB_INFO=$(/src/info.expect) 
+if [[ $? == 2 ]]; then
+    set -o errexit 
+    bashio::log.info "" 
+    bashio::log.info "${PMB_INFO}"
+    bashio::log.info ""
+    bashio::log.info "Starting ProtonMail Bridge" 
+    /protonmail/proton-bridge --noninteractive
+else
+    bashio::log.error "Cannot connect - Please check errors above"
+fi

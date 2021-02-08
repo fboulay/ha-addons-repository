@@ -34,7 +34,6 @@ two_factor_code: ""
 
 **Note**: _This is just an example, don't copy and paste it! Create your own!_
 
-
 ### Option: `username`
 
 Enter you ProtonMail username in this field.
@@ -68,8 +67,6 @@ notify:
     username: <your_protonmail_bridge_username>
     password: <generated_protonmail_bridge_password>
 ```
-
-
 
 ### Option: `username` and `password`
 
@@ -115,42 +112,47 @@ Got questions?
 
 You can [open an issue here][issue] GitHub.
 
+You can also ask for help in the dedicated forum topic 
+https://community.home-assistant.io/t/new-addon-protonmail-bridge/277584
+
 ## Authors & contributors
 
 The original setup of this repository is by [Florian Boulay][fboulay].
 
-It is based on the work of [Xiaonan Shen][shenxn] who inspired this repository for the build process of ProtonMail bridge. The original repository is https://github.com/shenxn/protonmail-bridge-docker
+It is based on the work of [Xiaonan Shen][shenxn] who inspired this repository for the build 
+process of ProtonMail bridge. The original repository is https://github.com/shenxn/protonmail-bridge-docker
 
 ## Roadmap
 
 Here are some ideas to improve this addon:
 
 * Use a web interface to enter the 2nd factor code
-* Run the ProtonMail bridge in the background using Systemd (using this tutorial for example https://gist.github.com/ibaiul/60d603845df931483a05d96c5b433981)
+* Run the ProtonMail bridge in the background using Systemd (using this tutorial for 
+  example https://gist.github.com/ibaiul/60d603845df931483a05d96c5b433981)
 * Create a change log using [GitHub's releases][releases]
 functionality.
+* Exposes services to be able to interact with ProtonMail Bridge within Home Assistant
+* Test this addon on other architectures
+* Check if the ProtonMail password is in the `have i been pwned` database
 
 ## Testing on you local machine
 
-.Build the image in the ha-protonmail-bridge directory
-[source]
-----
+→ Build the image in the ha-protonmail-bridge directory
+```shell
 docker build --build-arg BUILD_FROM="homeassistant/amd64-base:latest" -t local/my-test-addon .
-----
+```
 
-.Run built image
-[source]
-----
+→ Run built image
+```shell
 docker run --rm -v /tmp/my_test_data:/data -p 25:2525 local/my-test-addon
-----
+```
 
 Inside the directory `my_test_data`, create a file called `options.json` with the correct configuration for the addon.
 
-.Start a shell in the image to debug
-[source]
-----
+→ Start a shell in the image to debug
+```shell
 docker run --rm -v /tmp/my_test_data:/data -p 25:2525  -ti --entrypoint bash local/my-test-addon
-----
+```
 
 ## License
 

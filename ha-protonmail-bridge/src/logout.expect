@@ -1,0 +1,30 @@
+#!/usr/bin/expect -f
+
+#
+# Clear registerd accounts using the `clear accounts` command
+#
+
+log_user 0
+set timeout 15
+
+spawn /protonmail/proton-bridge -c
+
+expect ">>>"
+send "clear accounts\r"
+
+expect "Do you really want remove all accounts"
+send "yes\r"
+
+expect {
+    "Keychain cleared" {
+        puts "Disconnected"
+        exit 0
+    }
+    timeout {
+        puts "Timeout while disconnecting"
+        exit -1
+    }
+}
+log_user 1
+puts ""
+exit -1

@@ -1,0 +1,61 @@
+#!/usr/bin/expect -f
+
+log_user 0
+
+set timeout 30
+
+set username [lindex $argv 0]
+set password [lindex $argv 1]
+set two_factor_code [lindex $argv 2]
+
+if {$two_factor_code eq ""} {set two_factor_code " "}
+
+spawn /protonmail/proton-bridge -c
+
+expect ">>>"
+send "login\r"
+expect "Username:"
+send "$username\r"
+expect "Password:"
+send "$password\r"
+
+expect {
+    "Incorrect login credentials" {
+        puts "Bad username or password"
+        exit 1
+    }
+    "Two factor code:" {
+        send "$two_factor_code\r"
+    }
+    "Account $username was added successfully" {
+        puts "Account authenticated"
+        exit 0
+    }
+    timeout {
+        puts "Timeout while authenticating"
+        exit -1
+    }
+}
+
+expect {
+    "incorrect 2FA code" {
+        puts "Bad 2FA code"
+        exit 2
+    }
+    -re "Account .* was added successfully" {
+        puts "Account authenticated"
+        exit 0
+    }
+    -re ".* user is already connected" {
+        puts "Account authenticated"
+        exit 0
+    }
+    timeout {
+        puts "Timeout while authenticating"
+        exit -1
+    }
+}
+
+expect ">>>"
+
+exit -1
