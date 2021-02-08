@@ -17,7 +17,7 @@ FROM $BUILD_FROM
 EXPOSE 25/tcp
 
 # Set bash by default
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+SHELL ["/bin/bash", "-c"]
 
 # Needed dependencies to run ProtonMail bridge
 RUN apk add --no-cache \
@@ -28,9 +28,9 @@ RUN apk add --no-cache \
     # Needed by ProtonMail bridge
     libsecret \
     # For PGP
-    pass \
-    # For tput command
-    ncurses \   
+    pass \   
+    # For having nanoseconds resolution date date command
+    coreutils \
     && rm -rf /var/cache/apk/*
 
 COPY --from=build /build/proton-bridge/Desktop-Bridge /protonmail/proton-bridge
@@ -45,5 +45,7 @@ RUN chmod +x /run.sh \
     && ln -s /data/.password-store /root/.password-store \
     && ln -s /data/.config /root/.config
 
+# Log timestamp format
+ENV LOG_TIMESTAMP "%F %T.%3N"
 
 ENTRYPOINT "bashio" "/run.sh" 

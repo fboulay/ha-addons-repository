@@ -34,7 +34,6 @@ two_factor_code: ""
 
 **Note**: _This is just an example, don't copy and paste it! Create your own!_
 
-
 ### Option: `username`
 
 Enter you ProtonMail username in this field.
@@ -68,8 +67,6 @@ notify:
     username: <your_protonmail_bridge_username>
     password: <generated_protonmail_bridge_password>
 ```
-
-
 
 ### Option: `username` and `password`
 
@@ -115,20 +112,28 @@ Got questions?
 
 You can [open an issue here][issue] GitHub.
 
+You can also ask for help in the dedicated forum topic 
+https://community.home-assistant.io/t/new-addon-protonmail-bridge/277584
+
 ## Authors & contributors
 
 The original setup of this repository is by [Florian Boulay][fboulay].
 
-It is based on the work of [Xiaonan Shen][shenxn] who inspired this repository for the build process of ProtonMail bridge. The original repository is https://github.com/shenxn/protonmail-bridge-docker
+It is based on the work of [Xiaonan Shen][shenxn] who inspired this repository for the build 
+process of ProtonMail bridge. The original repository is https://github.com/shenxn/protonmail-bridge-docker
 
 ## Roadmap
 
 Here are some ideas to improve this addon:
 
 * Use a web interface to enter the 2nd factor code
-* Run the ProtonMail bridge in the background using Systemd (using this tutorial for example https://gist.github.com/ibaiul/60d603845df931483a05d96c5b433981)
+* Run the ProtonMail bridge in the background using Systemd (using this tutorial for 
+  example https://gist.github.com/ibaiul/60d603845df931483a05d96c5b433981)
 * Create a change log using [GitHub's releases][releases]
 functionality.
+* Exposes services to be able to interact with ProtonMail Bridge within Home Assistant
+* Test this addon on other architectures
+* Check if the ProtonMail password is in the `have i been pwned` database
 
 ## Testing on you local machine
 
