@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.2.0
+
+### 🚀 Improvements
+
+- Add a security check on the ProtonMail password against the HaveIBeenPwned
+  database. If the password is not safe, a warning is displayed in the logs.
 
 ## 1.1.0
 

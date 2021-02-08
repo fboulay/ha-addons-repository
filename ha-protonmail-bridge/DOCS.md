@@ -42,6 +42,10 @@ Enter you ProtonMail username in this field.
 
 Enter you ProtonMail password in this field.
 
+A security check is made on the password when the addon is starting. The
+check is searching the password i the HaveIBeenPwned database. If the
+password is considered unsafe, a warning is displayed in the logs.
+
 ### Option: `two_factor_code`
 
 Use it only if enabled on your ProtonMail account.
@@ -94,7 +98,8 @@ All other options are explained in the documentation of the [SMTP integration][s
 - This add-on only works on `armv7` architectures (Raspberry PI), because it could 
 not be tested on other architectures.
 - This add-on is using an old version of the ProtonMail Bridge (1.4.5) because of some bugs 
-on `armv7` architecture on later versions.
+on `armv7` architecture on later versions. See
+https://www.reddit.com/r/ProtonMail/comments/jvzm12/issue_building_bridge_150/
 
 ## Changelog & Releases
 
@@ -106,6 +111,8 @@ based on the following:
 - `MINOR`: Backwards-compatible new features and enhancements.
 - `PATCH`: Backwards-compatible bugfixes and package updates.
 
+The changelog is available in the file [CHANGELOG.md](CHANGELOG.md)
+
 ## Support
 
 Got questions?
@@ -115,12 +122,23 @@ You can [open an issue here][issue] GitHub.
 You can also ask for help in the dedicated forum topic 
 https://community.home-assistant.io/t/new-addon-protonmail-bridge/277584
 
+
+### Error messages explained
+
+The logs can show some errors. The common errors are explained here:
+
+* `Bad 2FA code` Your 2nd factor code is wrong. Fix the `two_factor_code` in the configuration and restart
+  the addon.
+* `Bad username or password` The authentication has failed. Fix the `username` or the `password` in the 
+  configuration and restart the addon.
+* `Cannot connect - Please check errors above` Some errors occurred when starting the addon. The real
+  error should be displayed in the logs above this line.
+
 ## Authors & contributors
 
 The original setup of this repository is by [Florian Boulay][fboulay].
 
-It is based on the work of [Xiaonan Shen][shenxn] who inspired this repository for the build 
-process of ProtonMail bridge. The original repository is https://github.com/shenxn/protonmail-bridge-docker
+It is based on the work of [Xiaonan Shen][shenxn] who inspired this repository for the build
 
 ## Roadmap
 
@@ -133,7 +151,8 @@ Here are some ideas to improve this addon:
 functionality.
 * Exposes services to be able to interact with ProtonMail Bridge within Home Assistant
 * Test this addon on other architectures
-* Check if the ProtonMail password is in the `have i been pwned` database
+* Check if the ProtonMail password is in the `have i been pwned` database _**Done in
+  version 1.2.0**_
 
 ## Testing on you local machine
 
@@ -147,7 +166,8 @@ docker build --build-arg BUILD_FROM="homeassistant/amd64-base:latest" -t local/m
 docker run --rm -v /tmp/my_test_data:/data -p 25:2525 local/my-test-addon
 ```
 
-Inside the directory `my_test_data`, create a file called `options.json` with the correct configuration for the addon.
+Inside the directory `my_test_data`, create a file called `options.json` with the correct 
+configuration for the addon.
 
 → Start a shell in the image to debug
 ```shell
@@ -180,7 +200,7 @@ SOFTWARE.
 
 [fboulay]: https://github.com/fboulay
 [shenxn]: https://github.com/shenxn 
-[issue]: https://github.com/fboulay/addon-ha-protonmail-bridge/issues
-[releases]: https://github.com/fboulay/addon-ha-protonmail-bridge/releases
+[issue]: https://github.com/fboulay/ha-addons-repository/issues
+[releases]: https://github.com/fboulay/ha-addons-repository/releases
 [semver]: http://semver.org/spec/v2.0.0.htm
 [smtp]: https://www.home-assistant.io/integrations/smtp/
