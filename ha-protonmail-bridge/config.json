@@ -6,7 +6,7 @@
     "url": "https://github.com/fboulay/addon-ha-protonmail-bridge",
     "boot": "auto",
     "startup": "system",
-    "arch": ["armv7"],
+    "arch": ["armv7", "amd64"],
     "ports": {
         "25/tcp": null
     },

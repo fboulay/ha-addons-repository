@@ -6,11 +6,16 @@
 
 - Add a security check on the ProtonMail password against the HaveIBeenPwned
   database. If the password is not safe, a warning is displayed in the logs.
-
+- Support amd64 architecture
 ### 🐛 Bug fixes
 
 - The addon can sometimes start to late and the SMTP integration does not manage
   to communicate with it. Changed the startup option to `system`.
+
+### 📚 Documentation
+
+- Add badges about supported architecture
+- Add badge about supported licence
 ## 1.1.0
 
 ### 🚀 Improvements

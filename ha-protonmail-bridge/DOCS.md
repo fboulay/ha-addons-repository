@@ -1,5 +1,11 @@
 # Home Assistant Add-on: ProtonMail Bridge addon
 
+
+![Supports amd64 Architecture][amd64-shield]
+![Supports armv7 Architecture][armv7-shield]
+
+[![License][license-shield]](LICENSE.md)
+
 ProtonMail does not provide any SMTP server to integrate with the notification
 system of Home Assistant. Instead they provide a tool called the ProtonMail 
 Bridge.
@@ -204,3 +210,6 @@ SOFTWARE.
 [releases]: https://github.com/fboulay/ha-addons-repository/releases
 [semver]: http://semver.org/spec/v2.0.0.htm
 [smtp]: https://www.home-assistant.io/integrations/smtp/
+[amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
+[armv7-shield]: https://img.shields.io/badge/armv7-yes-green.svg
+[license-shield]: https://img.shields.io/github/license/fboulay/ha-addons-repository.svg
