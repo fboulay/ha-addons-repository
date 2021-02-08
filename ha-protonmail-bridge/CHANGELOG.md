@@ -7,6 +7,10 @@
 - Add a security check on the ProtonMail password against the HaveIBeenPwned
   database. If the password is not safe, a warning is displayed in the logs.
 
+### 🐛 Bug fixes
+
+- The addon can sometimes start to late and the SMTP integration does not manage
+  to communicate with it. Changed the startup option to `system`.
 ## 1.1.0
 
 ### 🚀 Improvements
