@@ -30,7 +30,7 @@ following these
 
 **Note**: _Remember to restart the add-on when the configuration is changed._
 
-Example add-on configuration:
+Example add-on configuration when directly editing yaml:
 
 ```yaml
 username: <my_proton_mail_username>
@@ -103,8 +103,8 @@ All other options are explained in the documentation of the [SMTP integration][s
 
 - This add-on only works on `armv7` architectures (Raspberry PI), because it could 
 not be tested on other architectures.
-- This add-on is using an old version of the ProtonMail Bridge (1.4.5) because of some bugs 
-on `armv7` architecture on later versions. See
+- This add-on is using an old version of the ProtonMail Bridge (1.4.5) because of 
+  some bugs on `armv7` architecture on later versions. See
 https://www.reddit.com/r/ProtonMail/comments/jvzm12/issue_building_bridge_150/
 
 ## Changelog & Releases
@@ -152,13 +152,14 @@ Here are some ideas to improve this addon:
 
 * Use a web interface to enter the 2nd factor code
 * Run the ProtonMail bridge in the background using Systemd (using this tutorial for 
-  example https://gist.github.com/ibaiul/60d603845df931483a05d96c5b433981)
-* Create a change log using [GitHub's releases][releases]
-functionality.
+  example https://gist.github.com/ibaiul/60d603845df931483a05d96c5b433981) or S6 overlay
+* Create a change log using [GitHub's releases][releases] functionality.
 * Exposes services to be able to interact with ProtonMail Bridge within Home Assistant
-* Test this addon on other architectures
-* Check if the ProtonMail password is in the `have i been pwned` database _**Done in
+* Test this addon on other architectures _**Done for amd64 in version 1.2.0**_
+* Check if the ProtonMail password is in the `have i been pwned` database _**Done in 
   version 1.2.0**_
+* Create an automated build to publish all images on Docker Hub when a new release
+  is created
 
 ## Testing on you local machine
 
@@ -172,8 +173,8 @@ docker build --build-arg BUILD_FROM="homeassistant/amd64-base:latest" -t local/m
 docker run --rm -v /tmp/my_test_data:/data -p 25:2525 local/my-test-addon
 ```
 
-Inside the directory `my_test_data`, create a file called `options.json` with the correct 
-configuration for the addon.
+Inside the directory `my_test_data`, create a file called `options.json` with 
+the correct configuration for the addon.
 
 → Start a shell in the image to debug
 ```shell

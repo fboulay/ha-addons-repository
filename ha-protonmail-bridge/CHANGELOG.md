@@ -16,6 +16,8 @@
 
 - Add badges about supported architecture
 - Add badge about supported licence
+- Add labels in the Dockerfile
+  
 ## 1.1.0
 
 ### 🚀 Improvements
