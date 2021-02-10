@@ -159,7 +159,7 @@ Here are some ideas to improve this addon:
 * Check if the ProtonMail password is in the `have i been pwned` database _**Done in 
   version 1.2.0**_
 * Create an automated build to publish all images on Docker Hub when a new release
-  is created
+  is created _**Done in version 1.2.0**_
 
 ## Testing on you local machine
 
