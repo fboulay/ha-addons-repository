@@ -1,12 +1,13 @@
 {
     "name": "ProtonMail bridge for HA",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "slug": "pmb",
     "description": "Install ProtonMail Bridge in Home Assistant. Allow to use a ProtonMail account to send emails",
     "url": "https://github.com/fboulay/addon-ha-protonmail-bridge",
     "boot": "auto",
-    "startup": "application",
-    "arch": ["armv7"],
+    "startup": "system",
+    "arch": ["armv7", "amd64"],
+    "image": "fboulay/ha-protonmail-bridge",
     "ports": {
         "25/tcp": null
     },

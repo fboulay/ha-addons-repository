@@ -1,5 +1,11 @@
 # Home Assistant Add-on: ProtonMail Bridge addon
 
+
+![Supports amd64 Architecture][amd64-shield]
+![Supports armv7 Architecture][armv7-shield]
+
+[![License][license-shield]](LICENSE.md)
+
 ProtonMail does not provide any SMTP server to integrate with the notification
 system of Home Assistant. Instead they provide a tool called the ProtonMail 
 Bridge.
@@ -24,7 +30,7 @@ following these
 
 **Note**: _Remember to restart the add-on when the configuration is changed._
 
-Example add-on configuration:
+Example add-on configuration when directly editing yaml:
 
 ```yaml
 username: <my_proton_mail_username>
@@ -41,6 +47,10 @@ Enter you ProtonMail username in this field.
 ### Option: `password`
 
 Enter you ProtonMail password in this field.
+
+A security check is made on the password when the addon is starting. The
+check is searching the password i the HaveIBeenPwned database. If the
+password is considered unsafe, a warning is displayed in the logs.
 
 ### Option: `two_factor_code`
 
@@ -93,8 +103,9 @@ All other options are explained in the documentation of the [SMTP integration][s
 
 - This add-on only works on `armv7` architectures (Raspberry PI), because it could 
 not be tested on other architectures.
-- This add-on is using an old version of the ProtonMail Bridge (1.4.5) because of some bugs 
-on `armv7` architecture on later versions.
+- This add-on is using an old version of the ProtonMail Bridge (1.4.5) because of 
+  some bugs on `armv7` architecture on later versions. See
+https://www.reddit.com/r/ProtonMail/comments/jvzm12/issue_building_bridge_150/
 
 ## Changelog & Releases
 
@@ -106,6 +117,8 @@ based on the following:
 - `MINOR`: Backwards-compatible new features and enhancements.
 - `PATCH`: Backwards-compatible bugfixes and package updates.
 
+The changelog is available in the file [CHANGELOG.md](CHANGELOG.md)
+
 ## Support
 
 Got questions?
@@ -115,12 +128,23 @@ You can [open an issue here][issue] GitHub.
 You can also ask for help in the dedicated forum topic 
 https://community.home-assistant.io/t/new-addon-protonmail-bridge/277584
 
+
+### Error messages explained
+
+The logs can show some errors. The common errors are explained here:
+
+* `Bad 2FA code` Your 2nd factor code is wrong. Fix the `two_factor_code` in the configuration and restart
+  the addon.
+* `Bad username or password` The authentication has failed. Fix the `username` or the `password` in the 
+  configuration and restart the addon.
+* `Cannot connect - Please check errors above` Some errors occurred when starting the addon. The real
+  error should be displayed in the logs above this line.
+
 ## Authors & contributors
 
 The original setup of this repository is by [Florian Boulay][fboulay].
 
-It is based on the work of [Xiaonan Shen][shenxn] who inspired this repository for the build 
-process of ProtonMail bridge. The original repository is https://github.com/shenxn/protonmail-bridge-docker
+It is based on the work of [Xiaonan Shen][shenxn] who inspired this repository for the build
 
 ## Roadmap
 
@@ -128,12 +152,14 @@ Here are some ideas to improve this addon:
 
 * Use a web interface to enter the 2nd factor code
 * Run the ProtonMail bridge in the background using Systemd (using this tutorial for 
-  example https://gist.github.com/ibaiul/60d603845df931483a05d96c5b433981)
-* Create a change log using [GitHub's releases][releases]
-functionality.
+  example https://gist.github.com/ibaiul/60d603845df931483a05d96c5b433981) or S6 overlay
+* Create a change log using [GitHub's releases][releases] functionality.
 * Exposes services to be able to interact with ProtonMail Bridge within Home Assistant
-* Test this addon on other architectures
-* Check if the ProtonMail password is in the `have i been pwned` database
+* Test this addon on other architectures _**Done for amd64 in version 1.2.0**_
+* Check if the ProtonMail password is in the `have i been pwned` database _**Done in 
+  version 1.2.0**_
+* Create an automated build to publish all images on Docker Hub when a new release
+  is created _**Done in version 1.2.0**_
 
 ## Testing on you local machine
 
@@ -147,7 +173,8 @@ docker build --build-arg BUILD_FROM="homeassistant/amd64-base:latest" -t local/m
 docker run --rm -v /tmp/my_test_data:/data -p 25:2525 local/my-test-addon
 ```
 
-Inside the directory `my_test_data`, create a file called `options.json` with the correct configuration for the addon.
+Inside the directory `my_test_data`, create a file called `options.json` with 
+the correct configuration for the addon.
 
 → Start a shell in the image to debug
 ```shell
@@ -180,7 +207,10 @@ SOFTWARE.
 
 [fboulay]: https://github.com/fboulay
 [shenxn]: https://github.com/shenxn 
-[issue]: https://github.com/fboulay/addon-ha-protonmail-bridge/issues
-[releases]: https://github.com/fboulay/addon-ha-protonmail-bridge/releases
+[issue]: https://github.com/fboulay/ha-addons-repository/issues
+[releases]: https://github.com/fboulay/ha-addons-repository/releases
 [semver]: http://semver.org/spec/v2.0.0.htm
 [smtp]: https://www.home-assistant.io/integrations/smtp/
+[amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
+[armv7-shield]: https://img.shields.io/badge/armv7-yes-green.svg
+[license-shield]: https://img.shields.io/github/license/fboulay/ha-addons-repository.svg

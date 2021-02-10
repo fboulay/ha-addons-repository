@@ -1,5 +1,7 @@
 = Home Assistant add-ons repository
 
+image::https://img.shields.io/github/license/fboulay/ha-addons-repository.svg[licence]
+
 == About
 
 Here, you will find all my add-ons for Home Assistant

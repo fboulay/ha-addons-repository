@@ -29,7 +29,7 @@ RUN apk add --no-cache \
     libsecret \
     # For PGP
     pass \   
-    # For having nanoseconds resolution date date command
+    # For having nanoseconds resolution with date command
     coreutils \
     && rm -rf /var/cache/apk/*
 
@@ -47,5 +47,13 @@ RUN chmod +x /run.sh \
 
 # Log timestamp format
 ENV LOG_TIMESTAMP "%F %T.%3N"
+
+ARG BUILD_ARCH
+ARG BUILD_VERSION
+LABEL io.hass.version="${BUILD_VERSION}" io.hass.type="addon" io.hass.arch="${BUILD_ARCH}" \
+    maintainer="Florian Boulay" \
+    org.opencontainers.image.authors="Florian Boulay" \
+    org.opencontainers.image.version="${BUILD_VERSION}" \
+    org.opencontainers.image.licenses="MIT"
 
 ENTRYPOINT "bashio" "/run.sh" 

@@ -28,9 +28,11 @@ if [[ $? != 0 ]]; then
     pass init pass-key &> /dev/null
 fi
 
+# Check if the password is in the HaveIBeenPwned database
+bashio::config.suggest.safe_password 'password'
+
 # A new one is created if not connected to ProtonMail
 PMB_CONNECTED=$(/src/info.expect)
-
 if [[ $? == 1 ]]; then
     bashio::log.info "Not connected - adding account to ProtonMail Bridge"
     set +o errexit 

@@ -1,6 +1,25 @@
 # Changelog
 
+## 1.2.0
 
+### 🚀 Improvements
+
+- Add a security check on the ProtonMail password against the HaveIBeenPwned
+  database. If the password is not safe, a warning is displayed in the logs.
+- Support amd64 architecture
+- Automatically push docker image to Docker Hub when a PR is merged on main
+
+### 🐛 Bug fixes
+
+- The addon can sometimes start to late and the SMTP integration does not manage
+  to communicate with it. Changed the startup option to `system`.
+
+### 📚 Documentation
+
+- Add badges about supported architecture
+- Add badge about supported licence
+- Add labels in the Dockerfile
+  
 ## 1.1.0
 
 ### 🚀 Improvements
