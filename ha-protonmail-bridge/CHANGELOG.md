@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.2.1
+
+### 🐛 Bug fixes
+
+- Github action to publish to Docker Hub is now working
+  
 ## 1.2.0
 
 ### 🚀 Improvements
