@@ -2,7 +2,9 @@ name: Publish Docker image
 on:
   pull_request:
     types: [ closed ]
-
+  push:
+    branches-ignore:
+      - main
 
 jobs:
   push_to_registry:
@@ -62,3 +64,13 @@ jobs:
               ref: "refs/tags/v${{ fromJSON(steps.config_file.outputs.content).version }}",
               sha: context.sha
             })
+  shellcheck:
+    name: Run Shellcheck
+    runs-on: ubuntu-20.04
+    steps:
+      -
+        name: Check out the repo
+        uses: actions/checkout@v2
+      - 
+        name: Run ShellCheck
+        uses: ludeeus/action-shellcheck@master
