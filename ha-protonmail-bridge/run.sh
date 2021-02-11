@@ -21,8 +21,8 @@ socat TCP-LISTEN:143,fork TCP:127.0.0.1:1143 &
 set +o errexit 
 
 # Generate a PGP key if missing
-gpg --list-keys pass-key &> /dev/null
-if [[ $? != 0 ]]; then
+
+if ! gpg --list-keys pass-key &> /dev/null; then
     bashio::log.info "First time launch - Generating a PGP key"
     gpg --no-options --generate-key --batch --no-tty /protonmail/gpgparams &> /dev/null
     pass init pass-key &> /dev/null
@@ -32,14 +32,13 @@ fi
 bashio::config.suggest.safe_password 'password'
 
 # A new one is created if not connected to ProtonMail
-PMB_CONNECTED=$(/src/info.expect)
+/src/info.expect  > /dev/null
 if [[ $? == 1 ]]; then
     bashio::log.info "Not connected - adding account to ProtonMail Bridge"
     set +o errexit 
-    PMB_ADD_ACCOUNT=$(/src/add-account.expect $(bashio::config 'username') $(bashio::config 'password') $(bashio::config 'two_factor_code')) 
-
+    
     # Display error on add account
-    if [[ $? != 0 ]]; then
+    if ! PMB_ADD_ACCOUNT=$(/src/add-account.expect "$(bashio::config 'username')" "$(bashio::config 'password')" "$(bashio::config 'two_factor_code')"); then
         bashio::log.error "${PMB_ADD_ACCOUNT}" 
     fi
 fi
