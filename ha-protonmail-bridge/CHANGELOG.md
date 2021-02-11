@@ -1,5 +1,14 @@
 # Changelog
 
+
+## 1.2.2
+
+### 🚀 Improvements
+
+- Github action now update the Docker Hub description when pushing
+  a new image.
+- Add Shellcheck on every push.
+
 ## 1.2.1
 
 ### 🐛 Bug fixes
