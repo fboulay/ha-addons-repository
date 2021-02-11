@@ -1,7 +1,10 @@
-name: Publish Docker image
+name: ProtonMail Bridge CI/CD
 on:
   pull_request:
     types: [ closed ]
+  push:
+    branches-ignore:
+      - main
 
 jobs:
   push_to_registry:
@@ -34,6 +37,22 @@ jobs:
             --amd64 \
             --armv7
       -
+        name: Update Docker Hub description armv7
+        uses: peter-evans/dockerhub-description@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          repository: fboulay/ha-protonmail-bridge-armv7
+          readme-filepath: ./ha-protonmail-bridge/DOCS.md
+      -
+        name: Update Docker Hub description amd64
+        uses: peter-evans/dockerhub-description@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          repository: fboulay/ha-protonmail-bridge-amd64
+          readme-filepath: ./ha-protonmail-bridge/DOCS.md
+      -
         name: Git tag
         uses: actions/github-script@v3
         with:
@@ -45,3 +64,13 @@ jobs:
               ref: "refs/tags/v${{ fromJSON(steps.config_file.outputs.content).version }}",
               sha: context.sha
             })
+  shellcheck:
+    name: Run Shellcheck
+    runs-on: ubuntu-20.04
+    steps:
+      -
+        name: Check out the repo
+        uses: actions/checkout@v2
+      - 
+        name: Run ShellCheck
+        uses: ludeeus/action-shellcheck@master

@@ -23,14 +23,6 @@ socat TCP-LISTEN:143,fork TCP:127.0.0.1:1143 &
 gpg --no-options --generate-key --batch /protonmail/gpgparams
 pass init pass-key
 
-# Start protonmail
-# Fake a terminal, so it does not quit because of EOF...
-rm -f faketty
-mkfifo faketty
-# cat faketty | /pmb-non-interactive.expect $(bashio::config 'username') $(bashio::config 'password') $(bashio::config 'two_factor_code')
-rm -f foo
-mkfifo foo
-# cat faketty | /pmb-non-interactive.expect < foo &
 
 set +o errexit 
 
@@ -46,18 +38,18 @@ do
 	case $c in
         i) RET=$(/src/info.expect) 
             echo $?
-            echo $RET
+            echo "$RET"
             ;;
-        c) RET=$(/src/add-account.expect  $(bashio::config 'username') $(bashio::config 'password') $(bashio::config 'two_factor_code')) 
+        c) RET=$(/src/add-account.expect  "$(bashio::config 'username')" "$(bashio::config 'password')" "$(bashio::config 'two_factor_code')") 
             echo $?
-            echo $RET
+            echo "$RET"
             ;;
         l) RET=$(/src/logout.expect) 
             echo $?
-            echo $RET
+            echo "$RET"
             ;;
         e) break
             ;;
-        *) Pause "Select between i, c, l and e only"
+        *) echo "Select between i, c, l and e only"
 	esac
 done
