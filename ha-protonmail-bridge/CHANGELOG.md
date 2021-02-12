@@ -2,7 +2,9 @@
 
 ## 1.3.0
 
+### 🚀 Improvements
 
+- The addon is now running using S6 overlay.
 
 ### 🐛 Bug fixes
 

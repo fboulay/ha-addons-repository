@@ -153,6 +153,7 @@ Here are some ideas to improve this addon:
 * Use a web interface to enter the 2nd factor code
 * Run the ProtonMail bridge in the background using Systemd (using this tutorial for 
   example https://gist.github.com/ibaiul/60d603845df931483a05d96c5b433981) or S6 overlay
+  _**Done for amd64 in version 1.3.0 using S6 overlay**_
 * Create a change log using [GitHub's releases][releases] functionality.
 * Exposes services to be able to interact with ProtonMail Bridge within Home Assistant
 * Test this addon on other architectures _**Done for amd64 in version 1.2.0**_

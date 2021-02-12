@@ -3,7 +3,7 @@ ARG BUILD_FROM
 FROM golang:1.15.7-alpine3.13 AS build
 
 # Install dependencies
-RUN apk add bash git make pkgconfig libsecret-dev gcc musl-dev
+RUN apk --no-cache add bash git make pkgconfig libsecret-dev gcc musl-dev
 
 # Build
 WORKDIR /build/
@@ -11,7 +11,6 @@ COPY build.sh /build/
 RUN bash build.sh
 
 # Runtime image provided by Home Assistant
-
 FROM $BUILD_FROM
 
 EXPOSE 25/tcp
@@ -28,10 +27,9 @@ RUN apk add --no-cache \
     # Needed by ProtonMail bridge
     libsecret \
     # For PGP
-    pass \   
+    pass \
     # For having nanoseconds resolution with date command
-    coreutils \
-    && rm -rf /var/cache/apk/*
+    coreutils
 
 COPY --from=build /build/proton-bridge/Desktop-Bridge /protonmail/proton-bridge
 COPY gpgparams /protonmail/
@@ -56,4 +54,4 @@ LABEL io.hass.version="${BUILD_VERSION}" io.hass.type="addon" io.hass.arch="${BU
     org.opencontainers.image.version="${BUILD_VERSION}" \
     org.opencontainers.image.licenses="MIT"
 
-ENTRYPOINT "bashio" "/run.sh" 
+CMD ["bashio", "/run.sh"]
