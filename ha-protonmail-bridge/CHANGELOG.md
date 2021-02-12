@@ -5,7 +5,9 @@
 ### 🚀 Improvements
 
 - The addon is now running using S6 overlay.
-
+- Check in `run.sh` if all mandatory parameters are present.
+- Set versions explicitly in Dockerfile for packages installed with `apk`
+  
 ### 🐛 Bug fixes
 
 - Github Action to update Docker Hub description is now working

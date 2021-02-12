@@ -3,7 +3,13 @@ ARG BUILD_FROM
 FROM golang:1.15.7-alpine3.13 AS build
 
 # Install dependencies
-RUN apk --no-cache add bash git make pkgconfig libsecret-dev gcc musl-dev
+RUN apk add --no-cache \
+    bash=5.1.0-r0 \
+    git=2.30.1-r0 \
+    make=4.3-r0 \
+    libsecret-dev=0.20.4-r0 \
+    gcc=10.2.1_pre1-r3 \
+    musl-dev=1.2.2-r0
 
 # Build
 WORKDIR /build/
@@ -21,15 +27,15 @@ SHELL ["/bin/bash", "-c"]
 # Needed dependencies to run ProtonMail bridge
 RUN apk add --no-cache \
     # To control ProtonMail bridge cli
-    expect \
+    expect=5.45.4-r0 \
     # To bind any port
-    socat \
+    socat=1.7.4.1-r0 \
     # Needed by ProtonMail bridge
-    libsecret \
+    libsecret=0.20.4-r0 \
     # For PGP
-    pass \
+    pass=1.7.3-r3 \
     # For having nanoseconds resolution with date command
-    coreutils
+    coreutils=8.32-r2
 
 COPY --from=build /build/proton-bridge/Desktop-Bridge /protonmail/proton-bridge
 COPY gpgparams /protonmail/
