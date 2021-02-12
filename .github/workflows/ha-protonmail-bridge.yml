@@ -74,3 +74,15 @@ jobs:
       - 
         name: Run ShellCheck
         uses: ludeeus/action-shellcheck@master
+  hadolint:
+    name: Run hadolint
+    runs-on: ubuntu-20.04
+    steps:
+      -
+        name: Check out the repo
+        uses: actions/checkout@v2
+      - 
+        name: Run hadolint
+        uses: brpaz/hadolint-action@v1.2.1
+        with:
+          dockerfile: ./ha-protonmail-bridge/Dockerfile
