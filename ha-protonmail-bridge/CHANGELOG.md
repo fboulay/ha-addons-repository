@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.3.0
+
+
+
+### 🐛 Bug fixes
+
+- Github Action to update Docker Hub description is now working
 
 ## 1.2.2
 
