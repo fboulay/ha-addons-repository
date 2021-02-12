@@ -2,6 +2,9 @@
 
 bashio::log.info "Staring ProtonMail Bridge addon"
 
+bashio::config.require.username
+bashio::config.require.password
+
 # Create directories we want to store in persistent directory
 mkdir -p /data/.password-store
 mkdir -p /data/.gnupg 
