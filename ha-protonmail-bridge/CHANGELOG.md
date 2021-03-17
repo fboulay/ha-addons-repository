@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.3.1
+
+### 📚 Documentation
+
+- Improved and fixed documentation
+
 ## 1.3.0
 
 ### 🚀 Improvements
