@@ -18,9 +18,6 @@ ProtonMail server.
 
 ## Installation
 
-You can install this Home Assistant add-on using my add-on repository 
-following these Home Assistant Add-on Instructions.
-
 You can install this Home Assistant add-on using 
 [my add-on repository](https://github.com/fboulay/ha-repository) 
 following these 
@@ -101,7 +98,7 @@ All other options are explained in the documentation of the [SMTP integration][s
 
 ## Known issues and limitations
 
-- This add-on only works on `armv7` architectures (Raspberry PI), because it could 
+- This add-on only works on `armv7` and `amd64` architectures, because it could 
 not be tested on other architectures.
 - This add-on is using an old version of the ProtonMail Bridge (1.4.5) because of 
   some bugs on `armv7` architecture on later versions. See
@@ -151,16 +148,16 @@ It is based on the work of [Xiaonan Shen][shenxn] who inspired this repository f
 Here are some ideas to improve this addon:
 
 * Use a web interface to enter the 2nd factor code
-* Run the ProtonMail bridge in the background using Systemd (using this tutorial for 
-  example https://gist.github.com/ibaiul/60d603845df931483a05d96c5b433981) or S6 overlay
-  _**Done for amd64 in version 1.3.0 using S6 overlay**_
+* ~~Run the ProtonMail bridge in the background using Systemd (using this tutorial for 
+  example https://gist.github.com/ibaiul/60d603845df931483a05d96c5b433981) or S6 overlay~~
+  _**Done in version 1.3.0 using S6 overlay**_
 * Create a change log using [GitHub's releases][releases] functionality.
 * Exposes services to be able to interact with ProtonMail Bridge within Home Assistant
 * Test this addon on other architectures _**Done for amd64 in version 1.2.0**_
-* Check if the ProtonMail password is in the `have i been pwned` database _**Done in 
+* ~~Check if the ProtonMail password is in the `have i been pwned` database~~ _**Done in 
   version 1.2.0**_
-* Create an automated build to publish all images on Docker Hub when a new release
-  is created _**Done in version 1.2.0**_
+* ~~Create an automated build to publish all images on Docker Hub when a new release
+  is created~~ _**Done in version 1.2.0**_
 
 ## Testing on you local machine
 
