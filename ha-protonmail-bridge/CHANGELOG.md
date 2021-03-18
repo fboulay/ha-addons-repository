@@ -2,6 +2,11 @@
 
 ## 1.3.1
 
+### 🐛 Bug fixes
+
+- Fix Dockerfile. The multi-stage build was not working as expected
+  for building multi-arch images
+  
 ### 📚 Documentation
 
 - Improved and fixed documentation
