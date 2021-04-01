@@ -1,12 +1,20 @@
 # Changelog
 
+
+## 1.3.2
+
+### 📚 Documentation
+
+- Instructions on how to add the addon repository were wrong. The
+  URL is now fixed.
+  
 ## 1.3.1
 
 ### 🐛 Bug fixes
 
 - Fix Dockerfile. The multi-stage build was not working as expected
   for building multi-arch images
-  
+
 ### 📚 Documentation
 
 - Improved and fixed documentation
@@ -37,7 +45,7 @@
 ### 🐛 Bug fixes
 
 - Github action to publish to Docker Hub is now working
-  
+
 ## 1.2.0
 
 ### 🚀 Improvements
