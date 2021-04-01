@@ -19,7 +19,7 @@ ProtonMail server.
 ## Installation
 
 You can install this Home Assistant add-on using 
-[my add-on repository](https://github.com/fboulay/ha-repository) 
+[my add-on repository](https://github.com/fboulay/ha-addons-repository) 
 following these 
 [Home Assistant Add-on Instructions](https://www.home-assistant.io/hassio/installing_third_party_addons/).
 
@@ -54,9 +54,9 @@ password is considered unsafe, a warning is displayed in the logs.
 Use it only if enabled on your ProtonMail account.
 
 The management of the 2nd factor code (TOTP) is really simple and can lead to 
-failed authentication. Each code is has a lifespan of 30 seconds. Thus the 
+failed authentication. Each code has a lifespan of 30 seconds. Thus the 
 time when entering the code in the configuration, and the time when the addon 
-is started, should be has short as possible.
+is started should be has short as possible.
 
 ## Configuring Home Assistant to send notification using ProtonMail Bridge
 
