@@ -1,6 +1,16 @@
 # Changelog
 
+## 1.3.3
 
+### 🚀 Improvements
+
+- Update base docker image to 3.14
+- Improve security rating to 6
+  
+### 🐛 Bug fixes
+
+- Fix typo in logs
+  
 ## 1.3.2
 
 ### 📚 Documentation
