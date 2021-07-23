@@ -12,12 +12,12 @@ COPY src/* /src/
 
 RUN apk add --no-cache --virtual .build-dependencies \
     # build depenencies
-    go=1.15.10-r0 \
+    go=1.15.12-r0 \
     git=2.30.2-r0 \
     make=4.3-r0 \
     libsecret-dev=0.20.4-r0 \
     gcc=10.2.1_pre1-r3 \
-    musl-dev=1.2.2-r0 \
+    musl-dev=1.2.2-r1 \
     \
     # Run build script
     && bash build.sh \
