@@ -24,7 +24,7 @@ expect {
     "Configuration for" {
         puts "Connected\n"
 
-        puts "Add in your configuration.yaml with a STMP integration:"
+        puts "Add in your configuration.yaml with a SMTP integration:"
         expect -re "Username: (.*?)\r" {
             puts "username: $expect_out(1,string)" 
         }
