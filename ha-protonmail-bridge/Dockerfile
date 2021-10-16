@@ -12,7 +12,7 @@ COPY src/* /src/
 
 RUN apk add --no-cache --virtual .build-dependencies \
     # build depenencies
-    go=1.16.5-r0 \
+    go=1.16.8-r0 \
     git=2.32.0-r0 \
     make=4.3-r0 \
     libsecret-dev=0.20.4-r1 \
@@ -47,7 +47,7 @@ RUN apk add --no-cache --virtual .build-dependencies \
     && ln -s /data/.config /root/.config \
     \
     # Remove build related files
-    && cd proton-bridge \
+    && go mod init proton-bridge \
     && go clean -cache -modcache -i -r \
     && apk del --no-cache --purge .build-dependencies \
     && rm -Rf /build /tmp/*
