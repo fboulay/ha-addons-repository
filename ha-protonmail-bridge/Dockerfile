@@ -12,12 +12,12 @@ COPY src/* /src/
 
 RUN apk add --no-cache --virtual .build-dependencies \
     # build depenencies
-    go=1.15.10-r0 \
-    git=2.30.2-r0 \
+    go=1.16.8-r0 \
+    git=2.32.0-r0 \
     make=4.3-r0 \
-    libsecret-dev=0.20.4-r0 \
-    gcc=10.2.1_pre1-r3 \
-    musl-dev=1.2.2-r0 \
+    libsecret-dev=0.20.4-r1 \
+    gcc=10.3.1_git20210424-r2 \
+    musl-dev=1.2.2-r3 \
     \
     # Run build script
     && bash build.sh \
@@ -27,11 +27,11 @@ RUN apk add --no-cache --virtual .build-dependencies \
     # To control ProtonMail bridge cli
     expect=5.45.4-r0 \
     # To bind any port
-    socat=1.7.4.1-r0 \
+    socat=1.7.4.1-r1 \
     # Needed by ProtonMail bridge
-    libsecret=0.20.4-r0 \
+    libsecret=0.20.4-r1 \
     # For PGP
-    pass=1.7.3-r3 \
+    pass=1.7.4-r0 \
     # For having nanoseconds resolution with date command
     coreutils=8.32-r2 \
     \ 
@@ -47,6 +47,7 @@ RUN apk add --no-cache --virtual .build-dependencies \
     && ln -s /data/.config /root/.config \
     \
     # Remove build related files
+    && go mod init proton-bridge \
     && go clean -cache -modcache -i -r \
     && apk del --no-cache --purge .build-dependencies \
     && rm -Rf /build /tmp/*
