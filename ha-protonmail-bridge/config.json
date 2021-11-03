@@ -1,6 +1,6 @@
 {
     "name": "ProtonMail bridge",
-    "version": "1.3.3",
+    "version": "1.3.4",
     "slug": "pmb",
     "description": "Send emails using your ProtonMail account",
     "url": "https://github.com/fboulay/addon-ha-protonmail-bridge",
