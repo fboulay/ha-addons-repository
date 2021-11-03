@@ -31,6 +31,10 @@ expect {
         puts "Account authenticated"
         exit 0
     }
+    -re ".* This version of the app is no longer supported.*" {
+        puts "The version of this ProtonMail Bridge is no longer supported by ProtonMail. Check if there is an update to this addon."
+        exit -2
+    }
     timeout {
         puts "Timeout while authenticating"
         exit -1
@@ -49,6 +53,10 @@ expect {
     -re ".* user is already connected" {
         puts "Account authenticated"
         exit 0
+    }
+    -re ".* This version of the app is no longer supported.*" {
+        puts "The version of this ProtonMail Bridge is no longer supported by ProtonMail. Check if there is an update to this addon."
+        exit -2
     }
     timeout {
         puts "Timeout while authenticating"

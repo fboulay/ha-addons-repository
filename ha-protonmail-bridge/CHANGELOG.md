@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.3.4
+
+THIS ADDON DOES NOT WORK ANYMORE, read carefully the explanation below.
+
+### ✅ Misc
+
+- The ProtonMail server does not support anymore the ProtonMail Bridge 
+  with the version 1.4.5. Thus this addon does not work anymore. I am
+  working on a new working version. For now an error message is 
+  displayed in the log file.
+
 ## 1.3.3
 
 ### 🚀 Improvements
@@ -106,3 +117,5 @@
 ### 📚 Documentation
 
 ### 🠝 Dependency updates
+
+### ✅ Misc updates
