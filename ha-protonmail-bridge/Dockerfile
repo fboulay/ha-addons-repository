@@ -12,7 +12,7 @@ COPY src/* /src/
 
 RUN apk add --no-cache --virtual .build-dependencies \
     # build depenencies
-    go=1.16.8-r0 \
+    go=1.16.10-r0 \
     git=2.32.0-r0 \
     make=4.3-r0 \
     libsecret-dev=0.20.4-r1 \

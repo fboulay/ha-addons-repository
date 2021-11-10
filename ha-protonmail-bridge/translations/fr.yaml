@@ -1,0 +1,11 @@
+---
+configuration:
+  username:
+    name: nom d'utilisateur
+    description: Le nom d'utilisateur de votre compte ProtonMail
+  password:
+    name: mot de passe
+    description: Votre mot de passe ProtonMail
+  two_factor_code:
+    name: code 2fa
+    description: Si activé sur votre compte, il s'agit du code 2fa pour se connecter. Il est uniquement nécessaire lors de la première configuration de cet addon.

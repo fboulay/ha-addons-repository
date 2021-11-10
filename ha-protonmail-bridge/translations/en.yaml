@@ -1,0 +1,11 @@
+---
+configuration:
+  username:
+    name: username
+    description: Your username used on your ProtonMail account
+  password:
+    name: password
+    description: Your ProtonMail password
+  two_factor_code:
+    name: 2fa code
+    description: If enabled on your account, the 2fa code to authenticate. Only used the first time the addon is set up.

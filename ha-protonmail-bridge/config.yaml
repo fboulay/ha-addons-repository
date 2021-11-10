@@ -1,0 +1,25 @@
+---
+name: ProtonMail bridge
+version: 1.4.0
+slug: pmb
+description: Send emails using your ProtonMail account
+url: https://github.com/fboulay/ha-addons-repository/tree/main/ha-protonmail-bridge
+boot: auto
+startup: system
+arch: 
+    - armv7
+    - amd64
+image: fboulay/ha-protonmail-bridge-{arch}
+auth_api: true
+ports:
+    25/tcp: null
+ports_description:
+    25/tcp: SMTP port. 25 is the default for SMTP servers.
+options: 
+    username: null
+    password: null
+    two_factor_code: ""
+schema: 
+    username: str
+    password: password
+    two_factor_code: str?
