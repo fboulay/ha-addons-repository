@@ -4,7 +4,11 @@
 
 ### 🐛 Bug fixes
 
-- Fix the docker build. The go dependency was not available anymore
+- Fix the docker build. The go dependency was not available anymore.
+
+### ✅ Misc updates
+
+- Config file is now is yaml format.
 
 ## 1.3.4
 
