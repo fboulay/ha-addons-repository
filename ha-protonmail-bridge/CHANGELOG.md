@@ -2,6 +2,11 @@
 
 ## 1.4.0
 
+### 🚀 Improvements
+
+- Add translations for the configuration options. Available languages
+  are french and english.
+
 ### 🐛 Bug fixes
 
 - Fix the docker build. The go dependency was not available anymore.

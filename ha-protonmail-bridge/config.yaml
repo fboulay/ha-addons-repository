@@ -1,6 +1,6 @@
 ---
 name: ProtonMail bridge
-version: 1.4.0-dev3
+version: 1.4.0
 slug: pmb
 description: Send emails using your ProtonMail account
 url: https://github.com/fboulay/ha-addons-repository/tree/main/ha-protonmail-bridge
@@ -20,6 +20,6 @@ options:
     password: null
     two_factor_code: ""
 schema: 
-    username: email
+    username: str
     password: password
     two_factor_code: str?
