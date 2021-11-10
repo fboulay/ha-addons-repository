@@ -5,6 +5,8 @@
 ### 🐛 Bug fixes
 
 - Fix the docker build. The go dependency was not available anymore.
+- The addon is working fine again. A custom git repository is used to 
+  make it work on ARM architectures.
 
 ### ✅ Misc updates
 

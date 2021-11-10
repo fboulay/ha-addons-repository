@@ -2,12 +2,13 @@
 
 set -ex
 
-VERSION=1.4.5
+BRANCH=feature/working-version
+REPO_NAME=proton-bridge-for-arm
 
 # Clone new code
-git clone https://github.com/ProtonMail/proton-bridge.git
+git clone https://github.com/fboulay/${REPO_NAME}.git proton-bridge
 cd proton-bridge
-git checkout v$VERSION
+git checkout $BRANCH
 
 # Build
 make build-nogui
