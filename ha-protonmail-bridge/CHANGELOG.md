@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.4.0
+
+### 🐛 Bug fixes
+
+- Fix the docker build. The go dependency was not available anymore
+
 ## 1.3.4
 
 THIS ADDON DOES NOT WORK ANYMORE, read carefully the explanation below.
